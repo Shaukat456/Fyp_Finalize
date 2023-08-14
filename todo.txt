@@ -16,3 +16,7 @@ Ui -
 Theme : Yellow white
 Camera should be hidden initially ! Should open on click
 
+
+issue in sidebar
+
+Navbar  done

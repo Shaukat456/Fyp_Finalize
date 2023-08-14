@@ -1,20 +1,22 @@
-import Sidebar from "@/Components/Sidebar";
+// import Navbar from "@/Components/Navbar";
+// import Sidebar from "@/Components/Sidebar";
+
+import Navbar from "@/Components/Navbar";
 import React, { useEffect, useState } from "react";
+import ChequeEntryPage from "./ChequesEntry";
+// import Login from "./Login";
+// import { SidebarComponent } from "../Components/SidebarComponents";
 
 export default function Home() {
-  const [user] = useState(false);
+  const [user, setUser] = useState(false);
+  const [sidebar, setSideBar] = useState(false);
   useEffect(() => {
     console.log("render");
   }, [user]);
   return (
     <>
-      <div className=" flex  bg-yellow-400">
-        {/* SideBar will have setUser state */}
-        <Sidebar />
-        <div className="flex-column flex">
-          {/* <Login setUser={setUser} /> */}
-        </div>
-      </div>
+      <ChequeEntryPage />
+      {/* <Navbar /> */}
     </>
   );
 }
