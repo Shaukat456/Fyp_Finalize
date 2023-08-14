@@ -4,6 +4,7 @@
 import Navbar from "@/Components/Navbar";
 import React, { useEffect, useState } from "react";
 import ChequeEntryPage from "./ChequesEntry";
+import { Confirm } from "./Confirm";
 // import Login from "./Login";
 // import { SidebarComponent } from "../Components/SidebarComponents";
 
@@ -15,7 +16,8 @@ export default function Home() {
   }, [user]);
   return (
     <>
-      <ChequeEntryPage />
+      {/* <ChequeEntryPage /> */}
+      <Confirm />
       {/* <Navbar /> */}
     </>
   );
