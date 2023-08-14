@@ -1,84 +1,80 @@
-import { FaShoppingBag  , FaChartLine} from "react-icons/fa";
-
+import { FaShoppingBag, FaChartLine } from "react-icons/fa";
 
 const Sidebar_menu = [
   {
     General: [
       {
         name: "App",
-        img: <FaShoppingBag/>,
+        img: <FaShoppingBag />,
       },
       {
         name: "Ecommerce",
-        img: <FaChartLine/>,
+        img: <FaChartLine />,
       },
       {
         name: "Anaylatics",
-        img: <FaChartLine/>,
+        img: <FaChartLine />,
       },
       {
         name: "Booking ",
-        img: <FaShoppingBag/>,
+        img: <FaShoppingBag />,
       },
       {
         name: "File",
-        img: <FaShoppingBag/>,
+        img: <FaShoppingBag />,
       },
       {
         name: "App",
-        img: <FaShoppingBag/>,
+        img: <FaShoppingBag />,
       },
       {
         name: "Ecommerce",
-        img: <FaChartLine/>,
+        img: <FaChartLine />,
       },
       {
         name: "Anaylatics",
-        img: <FaChartLine/>,
+        img: <FaChartLine />,
       },
       {
         name: "Booking ",
-        img: <FaShoppingBag/>,
+        img: <FaShoppingBag />,
       },
       {
         name: "File",
-        img: <FaShoppingBag/>,
+        img: <FaShoppingBag />,
       },
       {
         name: "Anaylatics",
-        img: <FaChartLine/>,
+        img: <FaChartLine />,
       },
       {
         name: "Booking ",
-        img: <FaShoppingBag/>,
+        img: <FaShoppingBag />,
       },
       {
         name: "File",
-        img: <FaShoppingBag/>,
+        img: <FaShoppingBag />,
       },
       {
         name: "Anaylatics",
-        img: <FaChartLine/>,
+        img: <FaChartLine />,
       },
       {
         name: "Booking ",
-        img: <FaShoppingBag/>,
+        img: <FaShoppingBag />,
       },
       {
         name: "File",
-        img: <FaShoppingBag/>,
+        img: <FaShoppingBag />,
       },
     ],
     Management: [
       {
-        User: [
-            
-        ],
+        User: [],
       },
     ],
   },
 ];
 
-
-
 export default Sidebar_menu;
+P;

@@ -1,24 +1,22 @@
 // import Navbar from "@/Components/Navbar";
 // import Sidebar from "@/Components/Sidebar";
 
-import Navbar from "@/Components/Navbar";
 import React, { useEffect, useState } from "react";
-import ChequeEntryPage from "./ChequesEntry";
-import { Confirm } from "./Confirm";
+
+import { SidebarComponent } from "@/Components/SidebarComponent";
+import { useRouter } from "next/router";
 // import Login from "./Login";
 // import { SidebarComponent } from "../Components/SidebarComponents";
 
 export default function Home() {
-  const [user, setUser] = useState(false);
-  const [sidebar, setSideBar] = useState(false);
+  const router = useRouter();
+
   useEffect(() => {
-    console.log("render");
-  }, [user]);
+    router.push("/Login");
+  }, []);
   return (
     <>
-      {/* <ChequeEntryPage /> */}
-      <Confirm />
-      {/* <Navbar /> */}
+      <SidebarComponent />
     </>
   );
 }

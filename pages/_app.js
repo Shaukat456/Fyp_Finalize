@@ -1,9 +1,13 @@
+import { SidebarComponent } from "@/Components/SidebarComponent";
 import "@/styles/globals.css";
 
 function MyApp({ Component, pageProps }) {
   return (
     <>
-      <Component {...pageProps} />
+      <div className="flex">
+        <SidebarComponent />
+        <Component {...pageProps} />
+      </div>
     </>
   );
 }
