@@ -1,10 +1,7 @@
 Primary
 Enter Acc & BankName
-
     - picture 
     - Transaction approved |  Invoice (secondary)
-
-
     - data (db) print 
 
 
