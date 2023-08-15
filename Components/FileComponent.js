@@ -1,7 +1,7 @@
 import React, { useState, useRef } from "react";
-import { MdOutlineFileUpload } from "react-icons/md";
-import Image from "next/image"; // Assuming you're using Next.js
-import { useRouter } from "next/router";
+import { MdOutlineFileUpload } from "react-icons/md"; // Import your icon library here
+import { useRouter } from "next/router"; // Import the router from your specific package
+import Image from "next/image"; // Import the Image component from your specific package
 
 function FileComponent() {
   const router = useRouter();
@@ -14,30 +14,12 @@ function FileComponent() {
     fileInputRef.current.click();
   };
 
-  const handleFileChange = event => {
-    const selectedFile = event.target.files[0];
-    if (selectedFile) {
-      const imageUrl = URL.createObjectURL(selectedFile);
-      setPreviewUrl(imageUrl);
-      setIsModalOpen(true);
-    }
-  };
-
-  const handleActionSelect = action => {
-    saveToLocalStorage(action);
-    router.push("/Iban");
-  };
-
-  const saveToLocalStorage = action => {
-    console.log({ action });
-    localStorage.setItem("selectedAction", action);
-  };
-
   const handleUpload = async eve => {
     eve.preventDefault();
     const formData = new FormData();
-    formData.append("image", selectedFile);
+    formData.append("filesList", selectedFile);
 
+    console.log({ formData });
     const requestOptions = {
       method: "POST",
       body: formData,
@@ -48,16 +30,22 @@ function FileComponent() {
         "http://localhost:8000/filesend",
         requestOptions
       );
-      const data = await response.json();
-      console.log(data);
+      await response.json();
     } catch (error) {
       console.error("Error:", error);
     }
-
-    setTimeout(() => {
-      setShowLoader(false);
-    }, 4000);
   };
+
+  const handleFileChange = event => {
+    const newSelectedFile = event.target.files[0];
+    if (newSelectedFile) {
+      setSelectedFile(newSelectedFile);
+      const imageUrl = URL.createObjectURL(newSelectedFile);
+      setPreviewUrl(imageUrl);
+      setIsModalOpen(true);
+    }
+  };
+
   return (
     <div className="flex items-center justify-center">
       <div className="flex cursor-pointer justify-center rounded-lg border border-dotted border-gray-600 bg-slate-200 p-4">
@@ -79,7 +67,6 @@ function FileComponent() {
               <input
                 type="file"
                 ref={fileInputRef}
-                multiple
                 accept="image/jpg"
                 style={{ display: "none" }}
                 onChange={handleFileChange}
@@ -91,9 +78,15 @@ function FileComponent() {
             </>
           )}
         </figure>
-        {/* {isModalOpen && (
-         
-        )} */}
+        <div className="flex justify-center">
+          <button
+            onClick={handleUpload}
+            disabled={!selectedFile}
+            className="mt-8 transform rounded-md bg-blue-500 px-6 py-3 text-lg font-semibold text-white transition-transform duration-200 ease-in-out hover:scale-105 hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400"
+          >
+            Upload
+          </button>
+        </div>
       </div>
     </div>
   );

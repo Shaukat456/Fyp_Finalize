@@ -12,7 +12,7 @@ const ChequesEntry = () => {
   const [isCameraPaused, setIsCameraPaused] = useState(false);
   const [showLoader, setShowLoader] = useState(false);
   const [showCamera, setShowCamera] = useState(false);
-  const [selectedFile, setSelectedFile] = useState([]);
+  const [selectedFile, setSelectedFile] = useState();
   const [previewUrl, setPreviewUrl] = useState(null);
   const [error, setError] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -71,32 +71,32 @@ const ChequesEntry = () => {
     }, 4000);
   };
 
-  const handleFileChange = event => {
-    const files = event.target.files;
+  // const handleFileChange = event => {
+  //   const files = event.target.files;
 
-    if (!files || files.length <= 0) {
-      setError(true);
-      return;
-    }
+  //   if (!files || files.length <= 0) {
+  //     setError(true);
+  //     return;
+  //   }
 
-    try {
-      for (let i = 0; i < files.length; i++) {
-        const file = files[i];
-        selectedFile.push(file);
-        previewUrl.push(URL.createObjectURL(file));
-      }
+  //   try {
+  //     for (let i = 0; i < files.length; i++) {
+  //       const file = files[i];
+  //       selectedFile.push(file);
+  //       previewUrl.push(URL.createObjectURL(file));
+  //     }
 
-      setSelectedFile(selectedFile);
-      setPreviewUrl(previewUrl);
-    } catch (error) {
-      if (error instanceof Error) {
-        console.log(error?.message);
-        return error.message;
-      }
+  //     setSelectedFile(selectedFile);
+  //     setPreviewUrl(previewUrl);
+  //   } catch (error) {
+  //     if (error instanceof Error) {
+  //       console.log(error?.message);
+  //       return error.message;
+  //     }
 
-      return error?.message;
-    }
-  };
+  //     return error?.message;
+  //   }
+  // };
 
   const fileInputRef = useRef(null);
 
@@ -108,8 +108,9 @@ const ChequesEntry = () => {
   const handleUpload = async eve => {
     eve.preventDefault();
     const formData = new FormData();
-    formData.append("image", selectedFile);
+    formData.append("filesList", selectedFile);
 
+    console.log({ formData });
     const requestOptions = {
       method: "POST",
       body: formData,
@@ -120,8 +121,7 @@ const ChequesEntry = () => {
         "http://localhost:8000/filesend",
         requestOptions
       );
-      const data = await response.json();
-      console.log(data);
+      await response.json();
     } catch (error) {
       console.error("Error:", error);
     }
@@ -250,15 +250,7 @@ const ChequesEntry = () => {
           )}
         </div>
 
-        <div className="flex justify-center">
-          <button
-            onClick={handleUpload}
-            disabled={!selectedFile}
-            className="mt-8 transform rounded-md bg-blue-500 px-6 py-3 text-lg font-semibold text-white transition-transform duration-200 ease-in-out hover:scale-105 hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400"
-          >
-            Upload
-          </button>
-        </div>
+        
       </div>
     </div>
   );
