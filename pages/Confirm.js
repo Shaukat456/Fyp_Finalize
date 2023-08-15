@@ -4,51 +4,41 @@ const Confirm = () => {
   const router = useRouter();
   return (
     <>
-      <div className="flex h-screen items-center justify-center">
-        <div className="w-2/3 flex-col rounded-lg border border-gray-500 bg-gray-100 p-3 font-semibold shadow-md">
-          <h1 className="mt-5 text-xl text-green-900">Confirm Check Details</h1>
-          <div className="my-5 rounded-lg bg-white shadow-sm">
-            <div className="flex justify-between border-b border-gray-200 p-4">
-              <h3 className="text-gray-500">Cheque Date</h3>
-              <h3 className="text-gray-700">05/05/3</h3>
-            </div>
-            <div className="flex justify-between border-b border-gray-200 p-4">
-              <h3 className="text-gray-500">Cheque Date</h3>
-              <h3 className="text-gray-700">05/05/3</h3>
-            </div>
-            <div className="flex justify-between border-b border-gray-200 p-4">
-              <h3 className="text-gray-500">Cheque Date</h3>
-              <h3 className="text-gray-700">05/05/3</h3>
-            </div>
-            <div className="flex justify-between border-b border-gray-200 p-4">
-              <h3 className="text-gray-500">Cheque Date</h3>
-              <h3 className="text-gray-700">05/05/3</h3>
-            </div>
-            <div className="flex justify-between border-b border-gray-200 p-4">
-              <h3 className="text-gray-500">Cheque Date</h3>
-              <h3 className="text-gray-700">05/05/3</h3>
-            </div>
-
-            {/* Repeat for other details */}
-          </div>
-
-          <div className="mt-5 flex items-center justify-between">
-            <button
-              type="submit"
-              onClick={() => router.push("/Home")}
-              className="dark:focus:ring-primary-800 rounded-lg bg-gray-600 p-3 text-sm font-medium text-gray-200 hover:bg-green-700 focus:outline-none focus:ring-4 focus:ring-green-300 dark:bg-gray-800 dark:hover:bg-gray-900"
-            >
-              <span>
-                Data is correct! <strong>Continue</strong>
-              </span>
-            </button>
-
-            <p className="mx-5 cursor-pointer font-bold text-black underline">
-              Error in the data?
-            </p>
-          </div>
-        </div>
-      </div>
+    <div className="flex h-screen items-center justify-center">
+  <div className="w-2/3 bg-gray-100 p-5 rounded-lg shadow-md text-center">
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke="currentColor"
+      className="mx-auto w-16 h-16 text-green-600"
+    >
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="2"
+        d="M5 13l4 4L19 7"
+      />
+    </svg>
+    <h1 className="mt-3 text-2xl font-semibold text-gray-800">
+      Verification Successful
+    </h1>
+    <p className="mt-2 text-gray-600">
+      Your information has been successfully verified.
+    </p>
+    
+    <div className="mt-5 flex justify-center">
+      <button
+        type="submit"
+        onClick={() => router.push("/Home")}
+        className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-green-300"
+      >
+        Continue to Home
+      </button>
+    </div>
+  </div>
+</div>
+    
     </>
   );
 };
