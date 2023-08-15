@@ -31,6 +31,8 @@ function FileComponent() {
         requestOptions
       );
       await response.json();
+
+      router.push("/PreProceed");
     } catch (error) {
       console.error("Error:", error);
     }
