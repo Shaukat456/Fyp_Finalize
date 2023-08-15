@@ -38,6 +38,9 @@ const Iban = () => {
       );
       let data = await response.json();
 
+      if (data.data.success === false) {
+        alert("Error");
+      }
       router.push("/Confirm");
       if (!data) return;
     } catch (error) {
