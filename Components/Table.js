@@ -100,23 +100,21 @@ const Table = () => {
                       } dark:bg-gray-800`}
                     >
                       <td className="whitespace-nowrap px-6 py-4 font-medium text-gray-900 dark:text-white">
-                        {item[index].payBearer}
+                        {item[0]}
                       </td>
-                      <td className="px-6 py-4">{item[index].date}</td>
-                      <td className="px-6 py-4">{item[index].chequeNumber}</td>
-                      <td className="px-6 py-4">{item[index].accountNumber}</td>
-                      <td className="px-6 py-4">
-                        {item[index].courtesyAmount}
-                      </td>
-                      <td className="px-6 py-4">{item[index].chequeNumber}</td>
-                      <td className="px-6 py-4">{item[index].bankName}</td>
+                      <td className="px-6 py-4">{item[1]}</td>
+                      <td className="px-6 py-4">{item[2]}</td>
+                      <td className="px-6 py-4">{item[3]}</td>
+                      <td className="px-6 py-4">{item[4]}</td>
+                      <td className="px-6 py-4">{item[5]}</td>
+                      <td className="px-6 py-4">{item[6]}</td>
                     </tr>
                   ))}
                 </tbody>
               </table>
             </div>
 
-            <div className="my-4 flex justify-center">
+            {/* <div className="my-4 flex justify-center">
               <nav className="block">
                 <ul className="flex list-none flex-wrap rounded pl-0">
                   {Array.from({
@@ -137,7 +135,7 @@ const Table = () => {
                   ))}
                 </ul>
               </nav>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>
