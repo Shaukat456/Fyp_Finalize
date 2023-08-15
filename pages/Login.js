@@ -7,7 +7,7 @@ const Login = () => {
   const [user, setUser] = useState(false);
   const router = useRouter();
 
-  const handleSubmit = async e => {
+  const handleSubmit = e => {
     e.preventDefault();
     const formData = new FormData(e.target);
 
@@ -27,8 +27,9 @@ const Login = () => {
     }
 
     setUser(true);
-
-    await router.push("/dashboard");
+    localStorage.setItem("user", user);
+    // router.push("/ChequesEntry");
+    router.replace("/ChequesEntry");
   };
 
   useEffect(() => {

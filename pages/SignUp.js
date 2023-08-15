@@ -29,7 +29,7 @@ const SignUp = () => {
     // Perform registration actions, e.g., create an account or save user data
 
     // Now you can navigate to the desired route
-    await router.push("/dashboard");
+    router.push("/Login");
   };
 
   return (

@@ -13,12 +13,13 @@ const Iban = () => {
 
     setState(value);
   };
+
   return (
     <>
       <div className=" ml-2 flex w-1/3 flex-col  text-2xl">
         <div className="flex">
           <MdFileDownloadDone className="h-fit w-[300px]   text-center  text-green-600" />
-          {/* <h1> File Uploaded Successfully</h1> */}
+          <h1> File Uploaded Successfully</h1>
         </div>
 
         <div className="mb-6 ">
