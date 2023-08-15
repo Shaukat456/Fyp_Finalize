@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 
 const Table = () => {
   const [data, setData] = useState([]);
-  const itemsPerPage = 7; // Number of items per page
+  const itemsPerPage = 7;
   const [currentPage, setCurrentPage] = useState(1);
 
   const exampleData = [
@@ -72,22 +72,25 @@ const Table = () => {
                 <thead className="bg-gray-50 text-xs uppercase text-gray-700 dark:bg-gray-800 dark:text-gray-400">
                   <tr>
                     <th scope="col" className="px-6 py-3">
-                      Pay / Bearer
+                      Date
                     </th>
                     <th scope="col" className="px-6 py-3">
-                      Cheque Number
+                      Bearer Name
+                    </th>
+                    <th scope="col" className="px-6 py-3">
+                      Amount
+                    </th>
+                    <th scope="col" className="px-6 py-3">
+                      MCIR
                     </th>
                     <th scope="col" className="px-6 py-3">
                       Account Number
                     </th>
                     <th scope="col" className="px-6 py-3">
-                      Courtesy Amount
+                      Cheque Number
                     </th>
                     <th scope="col" className="px-6 py-3">
-                      Check Data
-                    </th>
-                    <th scope="col" className="px-6 py-3">
-                      IFSC Code
+                      Bank Name
                     </th>
                   </tr>
                 </thead>

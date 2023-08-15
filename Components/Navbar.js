@@ -55,38 +55,30 @@ const Navbar = ({ pageTitle = "", description = "" }) => {
     <>
       <div
         ref={reference}
-        className=" bgover body-font NavOver fixed z-50 w-full     text-gray-600 bg-blend-lighten transition-all hover:bg-blend-darken sm:w-[101vw] lg:w-5/6 "
+        className="bgover body-font NavOver fixed z-50 w-full text-gray-600 bg-blend-lighten transition-all sm:w-screen lg:w-5/6"
       >
-        <div className="animSide flex items-center justify-center overflow-hidden sm:flex-row sm:px-5 sm:py-8  md:mx-auto md:justify-start ">
-          <div className="flex flex-col">
-            <h1 className=" text-2xl font-bold text-green-700">{pageTitle}</h1>
+        <div className="animSide flex flex-col items-center justify-center sm:flex-row sm:px-5 sm:py-8 md:mx-auto md:justify-start">
+          <div className="flex flex-col items-center sm:items-start">
+            <h1 className="text-2xl font-bold text-green-700">{pageTitle}</h1>
             <p className="text-gray-500">{description}</p>
           </div>
 
-          <span className="mt-4 flex items-center space-x-5 sm:ml-auto sm:mt-0 sm:justify-start md:justify-center ">
+          <span className="mt-4 flex items-center space-x-5 sm:ml-auto sm:mt-0 sm:justify-start md:justify-center">
             <a className="ml-3 cursor-pointer rounded-xl text-gray-500 transition-all hover:scale-125 hover:bg-slate-200 hover:transition-all">
               <figure className={style.trs}></figure>
             </a>
 
-            {/* <a className="ml-3 text-gray-500">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth={1.5}
-                stroke="currentColor"
-                className="h-6 w-6 cursor-pointer rounded-xl transition-all hover:scale-125 hover:bg-slate-200 hover:transition-all "
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"
-                />
-              </svg>
-            </a> */}
-
-            <button onClick={user ? handleLogout : () => router.push("/Login")}>
+            <button
+              onClick={user ? handleLogout : () => router.push("/Login")}
+              className="ml-3 text-gray-500"
+            >
               {user ? "Logout" : "Login"}
+            </button>
+            <button
+              onClick={() => router.push("/Manage")}
+              className="ml-3 text-gray-500"
+            >
+              History
             </button>
 
             <a className="ml-3 text-gray-500">
@@ -112,7 +104,7 @@ const Navbar = ({ pageTitle = "", description = "" }) => {
                   width={30}
                   src={avatar}
                   alt=""
-                  className="cursor-pointer rounded-2xl transition-all hover:scale-125 hover:transition-all "
+                  className="cursor-pointer rounded-2xl transition-all hover:scale-125 hover:transition-all"
                 />
               </figure>
             </a>

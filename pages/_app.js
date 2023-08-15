@@ -8,6 +8,8 @@ function MyApp({ Component, pageProps }) {
   const [pageTitle, setPageTitle] = useState();
   const [pageDescription, setPageDescription] = useState();
 
+  const [modal, setModal] = useState();
+
   const router = useRouter();
 
   const pathname = router.pathname;

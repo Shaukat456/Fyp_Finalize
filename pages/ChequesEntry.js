@@ -5,6 +5,7 @@ import Webcam from "react-webcam";
 import { useRouter } from "next/router";
 import Navbar from "@/Components/Navbar";
 import Modal from "@/Components/Modal";
+import FileComponent from "@/Components/FileComponent";
 
 const ChequesEntry = () => {
   const webcamRef = useRef(null);
@@ -59,7 +60,6 @@ const ChequesEntry = () => {
         requestOptions
       );
       const data = await response.json();
-      console.log(data); // Handle the response data here
     } catch (error) {
       console.error("Error:", error);
     }
@@ -126,6 +126,10 @@ const ChequesEntry = () => {
       setError(true);
       console.error("Error:", error);
     }
+
+    setTimeout(() => {
+      setShowLoader(false);
+    }, 4000);
   };
 
   useEffect(() => {
@@ -137,12 +141,12 @@ const ChequesEntry = () => {
     <div className="flex min-h-screen flex-col items-center justify-center bg-gray-100 dark:bg-gray-800">
       <div className="mb-8 text-3xl font-semibold text-green-600"></div>
       <div className="my-10 w-[600px] space-y-12 rounded-lg bg-white p-6 shadow-md">
-        <div className="flex items-center space-x-4">
-          <h1 className="text-3xl font-semibold text-green-600">SCAN</h1>
+        <div className="flex items-center justify-center">
           <div
             onClick={() => setShowCamera(true)}
             className="flex cursor-pointer justify-center rounded-lg border border-dotted border-gray-600 bg-slate-200 p-4"
           >
+            <h1 className="text-xl font-semibold text-green-600">SCAN</h1>
             {showLoader && (
               <div className="fixed left-0 top-0 z-50 flex h-screen w-screen items-center justify-center bg-gray-900 bg-opacity-50">
                 <div className="flex items-center space-x-2">
@@ -192,15 +196,17 @@ const ChequesEntry = () => {
           )}
         </div>
 
-        <div className="flex items-center space-x-4">
-          <h1 className="text-3xl font-semibold text-green-600">UPLOAD</h1>
+        <FileComponent />
+
+        {/* <div className="flex items-center  justify-center  ">
           <div className="flex cursor-pointer justify-center rounded-lg border border-dotted border-gray-600 bg-slate-200 p-4">
+            <h1 className="text-xl font-semibold text-green-600">UPLOAD</h1>
             <figure className="">
               <input
                 type="file"
                 ref={fileInputRef}
                 multiple
-                accept="image/jpeg"
+                accept="image/jpg"
                 style={{ display: "none" }}
                 onChange={handleFileChange}
               />
@@ -209,6 +215,22 @@ const ChequesEntry = () => {
                 onClick={handleIconClick}
               />
             </figure>
+            {isModalOpen && (
+              <div className="space-y-2">
+                <button
+                  className="modal-button w-full rounded-md bg-blue-500 py-2 text-center font-semibold text-white transition-colors duration-300 ease-in-out hover:bg-blue-600 focus:outline-none focus:ring focus:ring-blue-300"
+                  onClick={() => handleActionSelect("Withdraw")}
+                >
+                  Withdraw
+                </button>
+                <button
+                  className="modal-button w-full rounded-md bg-blue-500 py-2 text-center font-semibold text-white transition-colors duration-300 ease-in-out hover:bg-blue-600 focus:outline-none focus:ring focus:ring-blue-300"
+                  onClick={() => handleActionSelect("Transfer")}
+                >
+                  Transfer
+                </button>
+              </div>
+            )}
             {previewUrl && (
               <Image
                 src={previewUrl}
@@ -217,16 +239,16 @@ const ChequesEntry = () => {
                 height={200}
               />
             )}
-            <div className="p-1">
-              {error && (
-                <div className="my-2 rounded-lg bg-red-500 p-2 text-white">
-                  <p className="text-sm font-medium">
-                    Please Select Atleast One File
-                  </p>
-                </div>
-              )}
-            </div>
           </div>
+        </div> */}
+        <div className="p-1">
+          {error && (
+            <div className="my-2 w-1/2 rounded-lg bg-red-500 p-2 text-white">
+              <p className="text-sm font-medium">
+                Please Select Atleast One File
+              </p>
+            </div>
+          )}
         </div>
 
         <div className="flex justify-center">

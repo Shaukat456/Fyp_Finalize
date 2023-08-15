@@ -21,3 +21,10 @@ transfer ->Enter Iban number
 
 
 
+verification popup
+alignment
+should have history in Navbar
+upload image should also have withdraw and transaction option 
+fix header 
+perform ocr => proceed => WELCOME USER PAGE
+

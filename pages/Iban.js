@@ -7,6 +7,7 @@ const Iban = () => {
   const [state, setState] = useState(null);
   const [showIban, setShowIban] = useState(false);
   const [selectedBank, setSelectedBank] = useState("");
+
   const handleChange = event => {
     const regex = /^[0-9]*$/;
     let value = event.target.value;
@@ -15,7 +16,6 @@ const Iban = () => {
     }
     setState(value);
   };
-
   const router = useRouter();
   const handleSubmit = async () => {
     const requestOptions = {
@@ -68,22 +68,25 @@ const Iban = () => {
           {showIban && (
             <div className="mb-6 ">
               <div className="form-group pb-10">
-                <label htmlFor="bankName">Select Bank:</label>
+                <label htmlFor="bankName" className="mb-2 block font-semibold">
+                  Select Bank:
+                </label>
                 <select
                   required
-                  className="form-control"
+                  className="block w-full rounded-md border border-gray-300 p-2 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200"
                   id="bankName"
                   name="bankName"
-                  value={selectedBank} // Bind the state value to the select element
-                  onChange={handleBankChange} // Call the handler when the select value changes
+                  value={selectedBank}
+                  onChange={handleBankChange}
                 >
-                  <option value="bank alfalah">bank alfalah</option>
-                  <option value="meezan bank">meezan bank</option>
+                  <option value="bank alfalah">Bank Alfalah</option>
+                  <option value="meezan bank">Meezan Bank</option>
                   <option value="standard chartered bank (pakistan) limited">
-                    standard chartered bank (pakistan) limited
+                    Standard Chartered Bank (Pakistan) Limited
                   </option>
                 </select>
               </div>
+
               <label
                 htmlFor="iban-input"
                 className="mb-2 block text-sm font-medium text-gray-500 dark:text-white"
@@ -108,7 +111,7 @@ const Iban = () => {
             onClick={handleSubmit}
             className="mx-auto mt-4 w-3/6 transform rounded-lg bg-yellow-500 px-5 py-2.5 text-center text-sm font-medium text-white transition duration-300 ease-in-out hover:bg-yellow-600 focus:outline-none focus:ring focus:ring-yellow-300"
           >
-            PERFORM OCR
+            PROCEED
           </button>
         </div>
       </div>
