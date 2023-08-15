@@ -26,13 +26,12 @@ function FileComponent() {
     };
 
     try {
+      router.push("/PreProceed");
       const response = await fetch(
         "http://localhost:8000/filesend",
         requestOptions
       );
       await response.json();
-
-      router.push("/PreProceed");
     } catch (error) {
       console.error("Error:", error);
     }
