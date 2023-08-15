@@ -6,14 +6,13 @@ import { toast } from "react-toastify";
 const Iban = () => {
   const [state, setState] = useState(null);
   const [showIban, setShowIban] = useState(false);
-
+  const [selectedBank, setSelectedBank] = useState("");
   const handleChange = event => {
     const regex = /^[0-9]*$/;
     let value = event.target.value;
     if (!regex.test(value)) {
       value = value.replace(/[^0-9]/g, "");
     }
-
     setState(value);
   };
 
@@ -24,22 +23,26 @@ const Iban = () => {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ Iban: state }),
+      body: JSON.stringify({ accountNumber: state, bankName: selectedBank }),
     };
 
     try {
       router.push("/Confirm");
       const response = await fetch(
-        "http://localhost:8000/filesend",
+        "http://localhost:8000/verify-transaction",
         requestOptions
       );
       const data = await response.json();
+      toast.success("Submitted");
 
       console.log(data); // Handle the response data here
     } catch (error) {
       toast.error("Error");
       console.error("Error:", error);
     }
+  };
+  const handleBankChange = event => {
+    setSelectedBank(event.target.value);
   };
 
   useEffect(() => {
@@ -63,7 +66,23 @@ const Iban = () => {
           </div>
 
           {showIban && (
-            <div className="mb-6">
+            <div className="mb-6 ">
+              <div className="form-group pb-10">
+                <label htmlFor="bankName">Select Bank:</label>
+                <select
+                  className="form-control"
+                  id="bankName"
+                  name="bankName"
+                  value={selectedBank} // Bind the state value to the select element
+                  onChange={handleBankChange} // Call the handler when the select value changes
+                >
+                  <option value="bank alfalah">bank alfalah</option>
+                  <option value="meezan bank">meezan bank</option>
+                  <option value="standard chartered bank (pakistan) limited">
+                    standard chartered bank (pakistan) limited
+                  </option>
+                </select>
+              </div>
               <label
                 htmlFor="iban-input"
                 className="mb-2 block text-sm font-medium text-gray-500 dark:text-white"
