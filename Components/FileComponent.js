@@ -8,6 +8,7 @@ function FileComponent() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [previewUrl, setPreviewUrl] = useState(null);
   const fileInputRef = useRef(null);
+  const [selectedFile, setSelectedFile] = useState();
 
   const handleIconClick = () => {
     fileInputRef.current.click();
@@ -30,6 +31,32 @@ function FileComponent() {
   const saveToLocalStorage = action => {
     console.log({ action });
     localStorage.setItem("selectedAction", action);
+  };
+
+  const handleUpload = async eve => {
+    eve.preventDefault();
+    const formData = new FormData();
+    formData.append("image", selectedFile);
+
+    const requestOptions = {
+      method: "POST",
+      body: formData,
+    };
+
+    try {
+      const response = await fetch(
+        "http://localhost:8000/filesend",
+        requestOptions
+      );
+      const data = await response.json();
+      console.log(data);
+    } catch (error) {
+      console.error("Error:", error);
+    }
+
+    setTimeout(() => {
+      setShowLoader(false);
+    }, 4000);
   };
   return (
     <div className="flex items-center justify-center">
