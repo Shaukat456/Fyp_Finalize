@@ -3,6 +3,8 @@ import Iban from "./Iban";
 import { useEffect, useRef, useState } from "react";
 import Webcam from "react-webcam";
 import { useRouter } from "next/router";
+import Navbar from "@/Components/Navbar";
+import Modal from "@/Components/Modal";
 
 const ChequesEntry = () => {
   const webcamRef = useRef(null);
@@ -12,22 +14,54 @@ const ChequesEntry = () => {
   const [selectedFile, setSelectedFile] = useState([]);
   const [previewUrl, setPreviewUrl] = useState(null);
   const [error, setError] = useState(false);
-
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedAction, setSelectedAction] = useState("");
   const router = useRouter();
+
+  const handleActionSelect = action => {
+    setSelectedAction(action);
+    saveToLocalStorage(action);
+
+    router.push("/Iban");
+  };
+
+  const saveToLocalStorage = action => {
+    console.log({ action });
+    localStorage.setItem("selectedAction", action);
+  };
+
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
+
   const captureImage = async () => {
     setIsCameraPaused(true);
     setShowLoader(true);
+    openModal();
 
     const imageSrc = await webcamRef.current.getScreenshot();
 
-    try {
-      const response = await axios.post("localhost:8000/filesend", {
-        image: imageSrc,
-      });
+    const requestOptions = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ image: imageSrc }),
+    };
 
-      console.log("Image uploaded successfully:", response.data);
+    try {
+      const response = await fetch(
+        "http://localhost:8000/filesend",
+        requestOptions
+      );
+      const data = await response.json();
+      console.log(data); // Handle the response data here
     } catch (error) {
-      console.error("Error uploading image:", error);
+      console.error("Error:", error);
     }
 
     setTimeout(() => {
@@ -41,6 +75,7 @@ const ChequesEntry = () => {
     const files = event.target.files;
 
     if (!files || files.length <= 0) {
+      setError(true);
       return "ERROR UPLOADING FILES TO THE SERVER";
     }
 
@@ -58,6 +93,8 @@ const ChequesEntry = () => {
         console.log(error?.message);
         return error.message;
       }
+
+      return error?.message;
     }
   };
 
@@ -68,40 +105,45 @@ const ChequesEntry = () => {
       fileInputRef.current.click();
     }
   };
-  const handleUpload = async () => {
+  const handleUpload = async eve => {
+    eve.preventDefault();
+    const formData = new FormData();
+    formData.append("image", selectedFile);
+
+    const requestOptions = {
+      method: "POST",
+      body: formData,
+    };
+
     try {
-      let formData = new FormData();
-      formData.append("filelist", selectedFile);
-      const response = await axios.post("localhost:8000/filesend", formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      });
-
-      console.log(response.data);
-
-      return response.data;
+      const response = await fetch(
+        "http://localhost:8000/filesend",
+        requestOptions
+      );
+      const data = await response.json();
+      console.log(data);
     } catch (error) {
-      if (error instanceof Error) {
-        console.error("Error uploading file:", error.message);
-        setError(true);
-      }
+      setError(true);
+      console.error("Error:", error);
     }
   };
 
   useEffect(() => {
-    if (!showCamera && webcamRef.current) {
-      webcamRef.current.stream.getTracks().forEach(track => track.stop());
-    }
+    // if (!showCamera && webcamRef.current) {
+    //   webcamRef.current.stream.getTracks().forEach(track => track.stop());
+    // }
   }, [showCamera]);
   return (
-    <>
-      <div className="space-y-10">
-        <div>
-          <h1 className="text-2xl font-semibold text-green-600">SCAN</h1>
+    <div className="">
+      <div className="mb-6 w-screen">
+        <Navbar />
+      </div>
+      <div className="my-20  space-y-10">
+        <div className="flex  justify-center">
+          <h1 className="m-6  text-2xl font-semibold text-green-600">SCAN</h1>
           <div
             onClick={() => setShowCamera(true)}
-            className="flex  w-[500px] justify-center rounded-lg  border border-dotted border-gray-600 text-center"
+            className="flex w-[600px]  justify-center rounded-lg border  border-dotted border-gray-600 bg-slate-200 text-center"
           >
             {showLoader && (
               <div className="fixed left-0 top-0 z-50 flex h-screen w-screen items-center justify-center bg-gray-900 bg-opacity-50">
@@ -118,15 +160,9 @@ const ChequesEntry = () => {
                   <Webcam
                     audio={false}
                     ref={webcamRef}
-                    screenshotFormat="image/jpeg"
+                    screenshotFormat="image/jpg"
                     videoConstraints={{ facingMode: "environment" }}
                   />
-                  <button
-                    className="rounded-xl border border-blue-800 bg-blue-700 p-2 text-slate-200"
-                    onClick={() => setShowCamera(false)}
-                  >
-                    Turn Off Camera
-                  </button>
                 </>
               )}
               {!showCamera && (
@@ -142,11 +178,28 @@ const ChequesEntry = () => {
               Capture
             </button>
           )}
+
+          {isModalOpen ? (
+            <div>
+              <button
+                className="modal-button block w-full rounded-md bg-blue-500 py-2 text-center font-semibold text-white hover:bg-blue-600"
+                onClick={() => handleActionSelect("Withdraw")}
+              >
+                Withdraw
+              </button>
+              <button
+                className="modal-button mt-2 block w-full rounded-md bg-blue-500 py-2 text-center font-semibold text-white hover:bg-blue-600"
+                onClick={() => handleActionSelect("Transfer")}
+              >
+                Transfer
+              </button>
+            </div>
+          ) : null}
         </div>
 
-        <div>
-          <h1 className="text-2xl font-semibold text-green-600">UPLOAD</h1>
-          <div className="flex w-[500px]  justify-center rounded-lg  border border-dotted border-gray-600 text-center">
+        <div className="flex   justify-center ">
+          <h1 className="m-3 text-2xl font-semibold text-green-600">UPLOAD</h1>
+          <div className="flex w-[600px]  justify-center rounded-lg  border border-dotted border-gray-600  bg-slate-200 text-center">
             <figure className="">
               <input
                 type="file"
@@ -180,16 +233,18 @@ const ChequesEntry = () => {
               )}
             </div>
           </div>
+        </div>
+        <div className="flex justify-center">
           <button
             onClick={handleUpload}
             disabled={!selectedFile}
-            className="focus:shadow-outline-blue mt-4 transform rounded-md bg-blue-500 px-3 py-2 font-semibold text-white transition-all duration-200 ease-in-out hover:scale-105 hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400"
+            className=" focus:shadow-outline-blue mt-4 flex transform justify-center rounded-md bg-blue-500 px-3 py-2 font-semibold text-white transition-all duration-200 ease-in-out hover:scale-105 hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400"
           >
             Upload
           </button>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

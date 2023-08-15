@@ -12,8 +12,12 @@ Enter Acc & BankName
 Ui -
 Theme : Yellow white
 Camera should be hidden initially ! Should open on click
-
-
+Proceed vs Withdraw
 issue in sidebar
-
 Navbar  done
+
+withdraw ->transaction successfully
+transfer ->Enter Iban number
+
+
+

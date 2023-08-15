@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import style from "../components/Navbar.module.css";
 import Image from "next/image";
+import avatar from "../public/avatar.png";
 const Navbar = ({ pageTitle = "", description = "" }) => {
   const reference = useRef(null);
 
@@ -32,9 +33,9 @@ const Navbar = ({ pageTitle = "", description = "" }) => {
     <>
       <div
         ref={reference}
-        className="  bgover body-font NavOver fixed z-50 w-[110vw] bg-transparent   text-gray-600 bg-blend-lighten backdrop-blur-sm transition-all hover:bg-blend-darken sm:w-[101vw] lg:w-5/6 "
+        className=" bgover  body-font NavOver fixed z-50  w-full bg-transparent   text-gray-600 bg-blend-lighten transition-all hover:bg-blend-darken sm:w-[101vw] lg:w-5/6 "
       >
-        <div className="animSide flex items-center justify-center overflow-hidden sm:flex-row sm:px-5 sm:py-8  md:mx-auto md:justify-start md:justify-between     ">
+        <div className="animSide flex items-center justify-center overflow-hidden sm:flex-row sm:px-5 sm:py-8  md:mx-auto md:justify-start ">
           <div className="flex flex-col">
             <h1 className=" text-2xl font-bold text-green-700">{pageTitle}</h1>
             <p className="text-gray-500">{pageTitle}</p>
@@ -79,9 +80,10 @@ const Navbar = ({ pageTitle = "", description = "" }) => {
             </a>
             <a href="">
               <figure>
-                <img
+                <Image
+                  height={30}
                   width={30}
-                  src="avatar.png"
+                  src={avatar}
                   alt=""
                   className="cursor-pointer rounded-2xl transition-all hover:scale-125 hover:transition-all "
                 />
