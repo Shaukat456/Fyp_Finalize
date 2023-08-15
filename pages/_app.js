@@ -35,6 +35,10 @@ function MyApp({ Component, pageProps }) {
         setPageDescription("Manage and Organize uploaded cheques");
         setPageTitle("Manage Cheques");
         break;
+      // case "/Home":
+      // setPageDescription("Manage and Organize uploaded cheques");
+      // setPageTitle("Manage Cheques");
+      // break;
       default:
         break;
     }
