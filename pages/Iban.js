@@ -36,7 +36,7 @@ const Iban = () => {
         "http://localhost:8000/verify-transaction",
         requestOptions
       );
-      const data = await response.json();
+      await response.json();
 
       return router.push("/Confirm");
     } catch (error) {
