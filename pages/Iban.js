@@ -31,13 +31,15 @@ const Iban = () => {
       }),
     };
 
-    router.push("/Confirm");
     try {
       const response = await fetch(
         "http://localhost:8000/verify-transaction",
         requestOptions
       );
-      const data = await response.json();
+      let data = await response.json();
+
+      router.push("/Confirm");
+      if (!data) return;
     } catch (error) {
       toast.error("Error");
       console.error("Error:", error);
