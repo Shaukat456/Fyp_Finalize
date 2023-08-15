@@ -34,10 +34,7 @@ const Table = () => {
 
   async function getData() {
     try {
-      const response = await fetch(
-        "http://localhost:8000/history",
-        requestOptions
-      );
+      const response = await fetch("http://localhost:8000/history");
       const fetchedData = await response.json();
 
       const refinedData = fetchedData?.rows;
@@ -95,7 +92,7 @@ const Table = () => {
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-gray-300 bg-white dark:bg-gray-800">
-                  {currentDataPage.map((item, index) => (
+                  {data?.map((item, index) => (
                     <tr
                       key={index}
                       className={`${
@@ -103,13 +100,16 @@ const Table = () => {
                       } dark:bg-gray-800`}
                     >
                       <td className="whitespace-nowrap px-6 py-4 font-medium text-gray-900 dark:text-white">
-                        {item.payBearer}
+                        {item[index].payBearer}
                       </td>
-                      <td className="px-6 py-4">{item?.chequeNumber}</td>
-                      <td className="px-6 py-4">{item?.accountNumber}</td>
-                      <td className="px-6 py-4">{item?.courtesyAmount}</td>
-                      <td className="px-6 py-4">{item?.checkData}</td>
-                      <td className="px-6 py-4">{item?.ifscCode}</td>
+                      <td className="px-6 py-4">{item[index].date}</td>
+                      <td className="px-6 py-4">{item[index].chequeNumber}</td>
+                      <td className="px-6 py-4">{item[index].accountNumber}</td>
+                      <td className="px-6 py-4">
+                        {item[index].courtesyAmount}
+                      </td>
+                      <td className="px-6 py-4">{item[index].chequeNumber}</td>
+                      <td className="px-6 py-4">{item[index].bankName}</td>
                     </tr>
                   ))}
                 </tbody>
