@@ -55,7 +55,7 @@ const Navbar = ({ pageTitle = "", description = "" }) => {
     <>
       <div
         ref={reference}
-        className="bgover body-font NavOver fixed z-50 w-full text-gray-600 bg-blend-lighten transition-all sm:w-screen lg:w-5/6"
+        className="bgover body-font NavOver  z-50 w-full text-gray-600 bg-blend-lighten transition-all sm:w-screen lg:w-5/6"
       >
         <div className="animSide flex flex-col items-center justify-center sm:flex-row sm:px-5 sm:py-8 md:mx-auto md:justify-start">
           <div className="flex flex-col items-center sm:items-start">
