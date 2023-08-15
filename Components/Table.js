@@ -39,7 +39,9 @@ const Table = () => {
         requestOptions
       );
       const fetchedData = await response.json();
-      setData(fetchedData.reverse());
+
+      const refinedData = fetchedData?.rows;
+      setData(refinedData?.reverse());
     } catch (error) {
       console.error("Error:", error);
     }
@@ -51,7 +53,7 @@ const Table = () => {
 
   const lastItemIndex = currentPage * itemsPerPage;
   const firstItemIndex = lastItemIndex - itemsPerPage;
-  const currentDataPage = exampleData.slice(firstItemIndex, lastItemIndex);
+  const currentDataPage = data.slice(firstItemIndex, lastItemIndex);
 
   const paginate = pageNumber => {
     setCurrentPage(pageNumber);

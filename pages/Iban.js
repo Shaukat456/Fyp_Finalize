@@ -70,6 +70,7 @@ const Iban = () => {
               <div className="form-group pb-10">
                 <label htmlFor="bankName">Select Bank:</label>
                 <select
+                  required
                   className="form-control"
                   id="bankName"
                   name="bankName"
@@ -93,6 +94,7 @@ const Iban = () => {
                 type="tel"
                 value={state}
                 onChange={handleChange}
+                required
                 placeholder="****************"
                 id="iban-input"
                 name="Iban"
