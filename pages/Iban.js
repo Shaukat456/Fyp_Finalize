@@ -39,7 +39,7 @@ const Iban = () => {
       const data = await response.json();
 
       if (data.success == false) {
-        return alert("Error");
+        return toast.error("Transaction failed");
       }
       return router.push("/Confirm");
     } catch (error) {
