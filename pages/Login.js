@@ -29,7 +29,7 @@ const Login = () => {
     setUser(true);
     localStorage.setItem("user", user);
     // router.push("/ChequesEntry");
-    router.replace("/ChequesEntry");
+    router.replace("/Home");
   };
 
   useEffect(() => {

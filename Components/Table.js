@@ -36,8 +36,8 @@ const Table = () => {
     try {
       const response = await fetch("http://localhost:8000/history");
       const fetchedData = await response.json();
-
       const refinedData = fetchedData?.rows;
+
       setData(refinedData?.reverse());
     } catch (error) {
       console.error("Error:", error);
