@@ -36,13 +36,12 @@ const Iban = () => {
         "http://localhost:8000/verify-transaction",
         requestOptions
       );
-      let data = await response.json();
+      const data = await response.json();
 
-      if (data.data.success === false) {
-        alert("Error");
+      if (data.success == false) {
+        return alert("Error");
       }
-      router.push("/Confirm");
-      if (!data) return;
+      return router.push("/Confirm");
     } catch (error) {
       toast.error("Error");
       console.error("Error:", error);
