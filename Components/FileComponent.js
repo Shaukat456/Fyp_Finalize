@@ -13,7 +13,7 @@ function FileComponent() {
   const handleIconClick = () => {
     fileInputRef.current.click();
   };
-  x;
+
   const handleUpload = async eve => {
     eve.preventDefault();
     const formData = new FormData();
