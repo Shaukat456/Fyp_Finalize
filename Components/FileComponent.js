@@ -64,22 +64,9 @@ function FileComponent() {
             </>
           )}
         </figure>
-        {isModalOpen && (
-          <div className="space-y-2">
-            <button
-              className="modal-button w-full rounded-md bg-blue-500 py-2 text-center font-semibold text-white transition-colors duration-300 ease-in-out hover:bg-blue-600 focus:outline-none focus:ring focus:ring-blue-300"
-              onClick={() => handleActionSelect("Withdraw")}
-            >
-              Withdraw
-            </button>
-            <button
-              className="modal-button w-full rounded-md bg-blue-500 py-2 text-center font-semibold text-white transition-colors duration-300 ease-in-out hover:bg-blue-600 focus:outline-none focus:ring focus:ring-blue-300"
-              onClick={() => handleActionSelect("Transfer")}
-            >
-              Transfer
-            </button>
-          </div>
-        )}
+        {/* {isModalOpen && (
+         
+        )} */}
       </div>
     </div>
   );

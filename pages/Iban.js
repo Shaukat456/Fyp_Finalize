@@ -7,6 +7,7 @@ const Iban = () => {
   const [state, setState] = useState(null);
   const [showIban, setShowIban] = useState(false);
   const [selectedBank, setSelectedBank] = useState("");
+  const action = localStorage.getItem("selectedAction");
 
   const handleChange = event => {
     const regex = /^[0-9]*$/;
@@ -23,19 +24,21 @@ const Iban = () => {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ accountNumber: state, bankName: selectedBank }),
+      body: JSON.stringify({
+        accountNumber: state,
+        bankName: selectedBank,
+        transactionType: action,
+      }),
     };
 
     try {
-      router.push("/Confirm");
       const response = await fetch(
         "http://localhost:8000/verify-transaction",
         requestOptions
       );
       const data = await response.json();
-      toast.success("Submitted");
 
-      console.log(data); // Handle the response data here
+      router.push("/Confirm");
     } catch (error) {
       toast.error("Error");
       console.error("Error:", error);
@@ -46,7 +49,6 @@ const Iban = () => {
   };
 
   useEffect(() => {
-    const action = localStorage.getItem("selectedAction");
     if (action === "Withdraw") {
       return setShowIban(false);
     }

@@ -76,7 +76,7 @@ const ChequesEntry = () => {
 
     if (!files || files.length <= 0) {
       setError(true);
-      return "ERROR UPLOADING FILES TO THE SERVER";
+      return;
     }
 
     try {
@@ -123,7 +123,6 @@ const ChequesEntry = () => {
       const data = await response.json();
       console.log(data);
     } catch (error) {
-      setError(true);
       console.error("Error:", error);
     }
 

@@ -35,7 +35,7 @@ const Confirm = () => {
           <div className="mt-5 flex items-center justify-between">
             <button
               type="submit"
-              onClick={() => router.push("/Manage")}
+              onClick={() => router.push("/Home")}
               className="dark:focus:ring-primary-800 rounded-lg bg-gray-600 p-3 text-sm font-medium text-gray-200 hover:bg-green-700 focus:outline-none focus:ring-4 focus:ring-green-300 dark:bg-gray-800 dark:hover:bg-gray-900"
             >
               <span>
