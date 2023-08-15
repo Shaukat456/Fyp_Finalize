@@ -2,16 +2,28 @@ import React, { useEffect, useRef, useState } from "react";
 import style from "../components/Navbar.module.css";
 import Image from "next/image";
 import avatar from "../public/avatar.png";
+import { useRouter } from "next/router";
 const Navbar = ({ pageTitle = "", description = "" }) => {
-  const reference = useRef(null);
-
+  const [user, setUser] = useState(null);
   const [window, setWindow] = useState(null);
-
+  const reference = useRef(null);
+  const router = useRouter();
   useEffect(() => {
     if (typeof window !== "undefined") {
       setWindow(window);
     }
   }, []);
+
+  useEffect(() => {
+    const storedUser = localStorage.getItem("user");
+    setUser(storedUser);
+  }, []);
+
+  const handleLogout = () => {
+    localStorage.removeItem("user");
+    setUser(null);
+    router.push("/Login");
+  };
 
   if (window) {
     window.onscroll = function () {
@@ -23,6 +35,16 @@ const Navbar = ({ pageTitle = "", description = "" }) => {
       }
     };
   }
+
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+
+  const handleAvatarClick = () => {
+    setIsDropdownOpen(!isDropdownOpen);
+  };
+
+  const handleAvatarLeave = () => {
+    setIsDropdownOpen(false);
+  };
   // const sidebar= useRef(null)
   // useEffect(()=>{
   //   // localStorage.setItem("sidebar_State", "hidden")
@@ -33,12 +55,12 @@ const Navbar = ({ pageTitle = "", description = "" }) => {
     <>
       <div
         ref={reference}
-        className=" bgover  body-font NavOver fixed z-50  w-full bg-transparent   text-gray-600 bg-blend-lighten transition-all hover:bg-blend-darken sm:w-[101vw] lg:w-5/6 "
+        className=" bgover body-font NavOver fixed z-50 w-full     text-gray-600 bg-blend-lighten transition-all hover:bg-blend-darken sm:w-[101vw] lg:w-5/6 "
       >
         <div className="animSide flex items-center justify-center overflow-hidden sm:flex-row sm:px-5 sm:py-8  md:mx-auto md:justify-start ">
           <div className="flex flex-col">
             <h1 className=" text-2xl font-bold text-green-700">{pageTitle}</h1>
-            <p className="text-gray-500">{pageTitle}</p>
+            <p className="text-gray-500">{description}</p>
           </div>
 
           <span className="mt-4 flex items-center space-x-5 sm:ml-auto sm:mt-0 sm:justify-start md:justify-center ">
@@ -46,7 +68,7 @@ const Navbar = ({ pageTitle = "", description = "" }) => {
               <figure className={style.trs}></figure>
             </a>
 
-            <a className="ml-3 text-gray-500">
+            {/* <a className="ml-3 text-gray-500">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
@@ -61,7 +83,12 @@ const Navbar = ({ pageTitle = "", description = "" }) => {
                   d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"
                 />
               </svg>
-            </a>
+            </a> */}
+
+            <button onClick={user ? handleLogout : () => router.push("/Login")}>
+              {user ? "Logout" : "Login"}
+            </button>
+
             <a className="ml-3 text-gray-500">
               <svg
                 xmlns="http://www.w3.org/2000/svg"

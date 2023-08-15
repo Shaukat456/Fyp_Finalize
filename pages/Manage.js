@@ -4,8 +4,7 @@ import Table from "@/Components/Table";
 const Manage = () => {
   return (
     <>
-      {/* <Navbar pageTitle="Manage Checks" /> */}
-      <div className="flex flex-col">
+      <div className="my-10 flex flex-col py-5">
         <Table />
       </div>
     </>

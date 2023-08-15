@@ -39,15 +39,15 @@ const Table = () => {
         requestOptions
       );
       const fetchedData = await response.json();
-      setData(fetchedData.reverse()); // Reverse the data order
+      setData(fetchedData.reverse());
     } catch (error) {
       console.error("Error:", error);
     }
   }
 
-  useEffect(() => {
-    // getData();
-  }, []);
+  // useEffect(() => {
+  //   getData();
+  // }, []);
 
   const lastItemIndex = currentPage * itemsPerPage;
   const firstItemIndex = lastItemIndex - itemsPerPage;
@@ -58,74 +58,82 @@ const Table = () => {
   };
   return (
     <>
-      <div className="relative overflow-x-auto">
-        <div className="flex justify-between">
-          <h1>Cheque History</h1>
-        </div>
+      <div className="bg-gray-100 p-6 dark:bg-gray-900">
+        <div className="mx-auto max-w-4xl">
+          <div className="relative overflow-x-auto">
+            <div className="mb-4 flex items-center justify-between">
+              {/* <h1 className="text-2xl font-bold">Cheque History</h1> */}
+            </div>
 
-        <table className="w-full text-left text-sm text-gray-500 dark:text-gray-400">
-          <thead className="bg-gray-50 text-xs uppercase text-gray-700 dark:bg-gray-700 dark:text-gray-400">
-            <tr>
-              <th scope="col" className="px-6 py-3">
-                Pay / Bearer
-              </th>
-              <th scope="col" className="px-6 py-3">
-                Cheque Number
-              </th>
-              <th scope="col" className="px-6 py-3">
-                Account Number
-              </th>
-              <th scope="col" className="px-6 py-3">
-                Courtesy Amount
-              </th>
-              <th scope="col" className="px-6 py-3">
-                Check Data
-              </th>
-              <th scope="col" className="px-6 py-3">
-                IFSC Code
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            {currentDataPage.map((item, index) => (
-              <tr
-                key={index}
-                className={`border-b ${
-                  index % 2 === 0 ? "bg-white" : "dark:bg-gray-800"
-                }`}
-              >
-                <td
-                  scope="row"
-                  className="whitespace-nowrap px-6 py-4 font-medium text-gray-900 dark:text-white"
-                >
-                  {item.payBearer}
-                </td>
-                <td className="px-6 py-4">{item?.chequeNumber}</td>
-                <td className="px-6 py-4">{item?.accountNumber}</td>
-                <td className="px-6 py-4">{item?.courtesyAmount}</td>
-                <td className="px-6 py-4">{item?.checkData}</td>
-                <td className="px-6 py-4">{item?.ifscCode}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+            <div className="overflow-hidden rounded-lg border-b border-gray-300 shadow dark:border-gray-700">
+              <table className="min-w-full divide-y divide-gray-300 dark:divide-gray-700">
+                <thead className="bg-gray-50 text-xs uppercase text-gray-700 dark:bg-gray-800 dark:text-gray-400">
+                  <tr>
+                    <th scope="col" className="px-6 py-3">
+                      Pay / Bearer
+                    </th>
+                    <th scope="col" className="px-6 py-3">
+                      Cheque Number
+                    </th>
+                    <th scope="col" className="px-6 py-3">
+                      Account Number
+                    </th>
+                    <th scope="col" className="px-6 py-3">
+                      Courtesy Amount
+                    </th>
+                    <th scope="col" className="px-6 py-3">
+                      Check Data
+                    </th>
+                    <th scope="col" className="px-6 py-3">
+                      IFSC Code
+                    </th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-gray-300 bg-white dark:bg-gray-800">
+                  {currentDataPage.map((item, index) => (
+                    <tr
+                      key={index}
+                      className={`${
+                        index % 2 === 0 ? "bg-gray-50" : "bg-white"
+                      } dark:bg-gray-800`}
+                    >
+                      <td className="whitespace-nowrap px-6 py-4 font-medium text-gray-900 dark:text-white">
+                        {item.payBearer}
+                      </td>
+                      <td className="px-6 py-4">{item?.chequeNumber}</td>
+                      <td className="px-6 py-4">{item?.accountNumber}</td>
+                      <td className="px-6 py-4">{item?.courtesyAmount}</td>
+                      <td className="px-6 py-4">{item?.checkData}</td>
+                      <td className="px-6 py-4">{item?.ifscCode}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
 
-        <div className="my-4 flex justify-center">
-          {Array.from({ length: Math.ceil(data.length / itemsPerPage) }).map(
-            (page, index) => (
-              <button
-                key={index}
-                onClick={() => paginate(index + 1)}
-                className={`mx-1 rounded-lg px-3 py-1 ${
-                  currentPage === index + 1
-                    ? "bg-blue-500 text-white"
-                    : "bg-gray-300"
-                }`}
-              >
-                {index + 1}
-              </button>
-            )
-          )}
+            <div className="my-4 flex justify-center">
+              <nav className="block">
+                <ul className="flex list-none flex-wrap rounded pl-0">
+                  {Array.from({
+                    length: Math.ceil(data.length / itemsPerPage),
+                  }).map((page, index) => (
+                    <li key={index}>
+                      <button
+                        onClick={() => paginate(index + 1)}
+                        className={`relative block border border-r-0 border-gray-300 bg-white px-3 py-2 leading-tight text-blue-500 ${
+                          currentPage === index + 1
+                            ? "bg-blue-500 text-white"
+                            : "text-gray-700 hover:bg-gray-100"
+                        }`}
+                      >
+                        {index + 1}
+                      </button>
+                    </li>
+                  ))}
+                </ul>
+              </nav>
+            </div>
+          </div>
         </div>
       </div>
     </>

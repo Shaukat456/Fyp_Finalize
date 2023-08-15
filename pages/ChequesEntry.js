@@ -134,20 +134,18 @@ const ChequesEntry = () => {
     // }
   }, [showCamera]);
   return (
-    <div className="">
-      <div className="mb-6 w-screen">
-        <Navbar />
-      </div>
-      <div className="my-20  space-y-10">
-        <div className="flex  justify-center">
-          <h1 className="m-6  text-2xl font-semibold text-green-600">SCAN</h1>
+    <div className="flex min-h-screen flex-col items-center justify-center bg-gray-100 dark:bg-gray-800">
+      <div className="mb-8 text-3xl font-semibold text-green-600"></div>
+      <div className="my-10 w-[600px] space-y-12 rounded-lg bg-white p-6 shadow-md">
+        <div className="flex items-center space-x-4">
+          <h1 className="text-3xl font-semibold text-green-600">SCAN</h1>
           <div
             onClick={() => setShowCamera(true)}
-            className="flex w-[600px]  justify-center rounded-lg border  border-dotted border-gray-600 bg-slate-200 text-center"
+            className="flex cursor-pointer justify-center rounded-lg border border-dotted border-gray-600 bg-slate-200 p-4"
           >
             {showLoader && (
               <div className="fixed left-0 top-0 z-50 flex h-screen w-screen items-center justify-center bg-gray-900 bg-opacity-50">
-                <div className="flex items-center justify-center space-x-2">
+                <div className="flex items-center space-x-2">
                   <div className="h-3 w-3 animate-pulse rounded-full bg-blue-700"></div>
                   <div className="h-3 w-3 animate-pulse rounded-full bg-blue-700"></div>
                   <div className="h-3 w-3 animate-pulse rounded-full bg-blue-700"></div>
@@ -156,50 +154,47 @@ const ChequesEntry = () => {
             )}
             <figure className="">
               {showCamera && (
-                <>
-                  <Webcam
-                    audio={false}
-                    ref={webcamRef}
-                    screenshotFormat="image/jpg"
-                    videoConstraints={{ facingMode: "environment" }}
-                  />
-                </>
+                <Webcam
+                  audio={false}
+                  ref={webcamRef}
+                  screenshotFormat="image/jpg"
+                  videoConstraints={{ facingMode: "environment" }}
+                />
               )}
               {!showCamera && (
-                <MdDocumentScanner className="h-fit w-[300px]   text-center  text-gray-600" />
+                <MdDocumentScanner className="h-fit w-[300px] text-center text-gray-600" />
               )}
             </figure>
           </div>
           {!isCameraPaused && !showLoader && showCamera && (
             <button
-              className="rounded-xl border border-blue-800 bg-blue-700 p-2 text-slate-200"
+              className="transform rounded-lg border border-blue-800 bg-blue-700 p-2 text-slate-200 transition duration-300 ease-in-out hover:bg-blue-600 focus:outline-none"
               onClick={captureImage}
             >
               Capture
             </button>
           )}
-
-          {isModalOpen ? (
-            <div>
+          {isModalOpen && (
+            <div className="space-y-2">
               <button
-                className="modal-button block w-full rounded-md bg-blue-500 py-2 text-center font-semibold text-white hover:bg-blue-600"
+                className="modal-button w-full rounded-md bg-blue-500 py-2 text-center font-semibold text-white transition-colors duration-300 ease-in-out hover:bg-blue-600 focus:outline-none focus:ring focus:ring-blue-300"
                 onClick={() => handleActionSelect("Withdraw")}
               >
                 Withdraw
               </button>
               <button
-                className="modal-button mt-2 block w-full rounded-md bg-blue-500 py-2 text-center font-semibold text-white hover:bg-blue-600"
+                className="modal-button w-full rounded-md bg-blue-500 py-2 text-center font-semibold text-white transition-colors duration-300 ease-in-out hover:bg-blue-600 focus:outline-none focus:ring focus:ring-blue-300"
                 onClick={() => handleActionSelect("Transfer")}
               >
                 Transfer
               </button>
             </div>
-          ) : null}
+          )}
         </div>
 
-        <div className="flex   justify-center ">
-          <h1 className="m-3 text-2xl font-semibold text-green-600">UPLOAD</h1>
-          <div className="flex w-[600px]  justify-center rounded-lg  border border-dotted border-gray-600  bg-slate-200 text-center">
+        <div className="flex items-center space-x-4">
+          <h1 className="text-3xl font-semibold text-green-600">UPLOAD</h1>
+          <div className="flex cursor-pointer justify-center rounded-lg border border-dotted border-gray-600 bg-slate-200 p-4">
             <figure className="">
               <input
                 type="file"
@@ -209,9 +204,8 @@ const ChequesEntry = () => {
                 style={{ display: "none" }}
                 onChange={handleFileChange}
               />
-
               <MdOutlineFileUpload
-                className="h-fit w-[300px]   text-center  text-gray-600"
+                className="h-fit w-[300px] cursor-pointer text-center text-gray-600"
                 onClick={handleIconClick}
               />
             </figure>
@@ -234,11 +228,12 @@ const ChequesEntry = () => {
             </div>
           </div>
         </div>
+
         <div className="flex justify-center">
           <button
             onClick={handleUpload}
             disabled={!selectedFile}
-            className=" focus:shadow-outline-blue mt-4 flex transform justify-center rounded-md bg-blue-500 px-3 py-2 font-semibold text-white transition-all duration-200 ease-in-out hover:scale-105 hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400"
+            className="mt-8 transform rounded-md bg-blue-500 px-6 py-3 text-lg font-semibold text-white transition-transform duration-200 ease-in-out hover:scale-105 hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400"
           >
             Upload
           </button>
