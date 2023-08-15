@@ -63,15 +63,6 @@ function FileComponent() {
               />
             </div>
           )}
-          <div className="flex justify-center">
-            <button
-              onClick={handleUpload}
-              disabled={!selectedFile}
-              className="mt-8 transform rounded-md bg-blue-500 px-6 py-3 text-lg font-semibold text-white transition-transform duration-200 ease-in-out hover:scale-105 hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400"
-            >
-              Upload
-            </button>
-          </div>
           {!previewUrl && (
             <>
               <input
@@ -88,6 +79,15 @@ function FileComponent() {
             </>
           )}
         </figure>
+        <div className="flex justify-center">
+          <button
+            onClick={handleUpload}
+            disabled={!selectedFile}
+            className="mt-8 transform rounded-md bg-blue-500 px-6 py-3 text-lg font-semibold text-white transition-transform duration-200 ease-in-out hover:scale-105 hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400"
+          >
+            Upload
+          </button>
+        </div>
       </div>
     </div>
   );
